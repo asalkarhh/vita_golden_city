@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark text-white;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold/60;
+  }
+}
+
+@layer components {
+  .gold-gradient-text {
+    @apply bg-gradient-to-r from-gold-deep via-gold to-gold-champagne bg-clip-text text-transparent;
+  }
+
+  .gold-gradient-bg {
+    @apply bg-gradient-to-r from-gold-deep via-gold to-gold-light;
+  }
+
+  .gold-border {
+    @apply border border-gold/30;
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+  }
+
+  .card-dark {
+    @apply bg-dark-soft border border-dark-border rounded-2xl;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.instagram-media {
+  margin: 0 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}

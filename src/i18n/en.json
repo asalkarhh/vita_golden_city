@@ -1,0 +1,296 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "collab": "Collab",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "booking_badge": "Booking slots open for {{month}} — Apply Now!",
+  "hero": {
+    "headline": "Vita's #1 Storyteller",
+    "subheadline": "2L+ followers · 50M+ views · 500+ brands promoted",
+    "cta_primary": "Connect for Collab",
+    "cta_secondary": "View My Work"
+  },
+  "stats": {
+    "followers": "Followers",
+    "views": "Total Views",
+    "brands": "Brands Promoted",
+    "reels": "Reels Created"
+  },
+  "featured_reels": {
+    "title": "Featured Reels",
+    "subtitle": "Watch some of our best brand promotions"
+  },
+  "brand_logos": {
+    "title": "Trusted by Leading Brands",
+    "subtitle": "Businesses that chose us to tell their story"
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Real results from real businesses in our community"
+  },
+  "why_work": {
+    "title": "Why Work With Us?",
+    "subtitle": "What sets us apart from other creators",
+    "reach_title": "Local Reach",
+    "reach_desc": "Deep audience in Sangli, Satara & Solapur belt — your customers are our followers",
+    "content_title": "Authentic Marathi Content",
+    "content_desc": "Content that speaks your customer's language — literally. Genuine, relatable, Marathi-first",
+    "turnaround_title": "48-Hour Turnaround",
+    "turnaround_desc": "From brief to posted reel in just 48 hours. Fast, reliable, and professional",
+    "results_title": "Verified Results",
+    "results_desc": "Every campaign backed by real engagement data. We deliver views, not just videos"
+  },
+  "final_cta": {
+    "title": "Ready to Grow Your Business?",
+    "subtitle": "Let's create content that puts your brand in front of 2 lakh+ audience",
+    "button": "Start Your Collab"
+  },
+  "about": {
+    "page_title": "About | Vita Golden City",
+    "hero_tagline": "The Voice of Vita",
+    "story_title": "Our Story",
+    "story_p1": "What started as a passion for showcasing the beauty and culture of Vita has grown into a powerful digital platform. With over 2 lakh followers on Instagram, Vita Golden City Official has become the go-to voice for everything happening in and around Vita.",
+    "story_p2": "We believe every local business has a story worth telling. From the corner tea shop to the biggest jeweler in town — every brand deserves to be seen, heard, and remembered. That's what we do. We turn local businesses into local legends.",
+    "story_p3": "Our content is rooted in authenticity. We don't just promote — we tell stories that resonate with the Marathi-speaking audience of Sangli, Satara, and Solapur. Every reel is crafted with care, every story is shot with purpose.",
+    "journey_title": "The Journey",
+    "values_title": "Our Values",
+    "value_1_title": "Authenticity",
+    "value_1_desc": "We keep it real. No fake reviews, no scripted promotions. Just genuine stories about genuine businesses.",
+    "value_2_title": "Community First",
+    "value_2_desc": "We grow when our community grows. Every brand we promote adds value to Vita's local economy.",
+    "value_3_title": "Quality Over Quantity",
+    "value_3_desc": "We'd rather make one incredible reel than ten mediocre ones. Your brand deserves the best.",
+    "value_4_title": "Transparency",
+    "value_4_desc": "Clear pricing, honest expectations, and real results. No hidden charges, no surprises.",
+    "awards_title": "Recognition & Features"
+  },
+  "services": {
+    "page_title": "Services & Packages | Vita Golden City",
+    "hero_title": "Services & Packages",
+    "hero_subtitle": "Choose the right promotion package for your business",
+    "popular": "Most Popular",
+    "get_this": "Get This Package",
+    "custom_quote": "Get Custom Quote",
+    "pricing_note": "Final pricing depends on brand fit and campaign scope. Submit the collab form for an exact quote.",
+    "story": {
+      "name": "Story Shoutout",
+      "price": "₹X",
+      "price_label": "Starting at",
+      "features": [
+        "24-hour Instagram story",
+        "1 link sticker included",
+        "Posted within 48 hours",
+        "Story highlights option",
+        "Basic analytics report"
+      ]
+    },
+    "reel": {
+      "name": "Single Reel Promotion",
+      "price": "₹Y",
+      "price_label": "Starting at",
+      "features": [
+        "Dedicated promotional reel",
+        "Hashtag & tag mention",
+        "Bio link for 7 days",
+        "Professional editing",
+        "Detailed analytics report",
+        "1 revision included"
+      ]
+    },
+    "combo": {
+      "name": "Reel + Stories Combo",
+      "price": "₹Z",
+      "price_label": "Starting at",
+      "features": [
+        "1 promotional reel",
+        "3 Instagram stories",
+        "Pinned post for 30 days",
+        "Bio link for 14 days",
+        "Professional editing & music",
+        "Full analytics dashboard",
+        "2 revisions included"
+      ]
+    },
+    "event": {
+      "name": "Event Coverage",
+      "price": "Custom",
+      "price_label": "Quote",
+      "features": [
+        "Half-day or full-day coverage",
+        "Multiple reels & stories",
+        "Live story updates",
+        "Professional videography",
+        "Complete event highlight reel",
+        "All raw footage included"
+      ]
+    },
+    "ambassador": {
+      "name": "Brand Ambassador",
+      "price": "Custom",
+      "price_label": "Monthly",
+      "features": [
+        "4 reels per month",
+        "12 stories per month",
+        "Exclusive partnership",
+        "Priority scheduling",
+        "Monthly performance report",
+        "Dedicated account manager",
+        "Content strategy consultation"
+      ]
+    }
+  },
+  "portfolio": {
+    "page_title": "Portfolio | Vita Golden City",
+    "hero_title": "Our Work",
+    "hero_subtitle": "Browse through our successful brand collaborations",
+    "filter_all": "All",
+    "filter_restaurants": "Restaurants",
+    "filter_realestate": "Real Estate",
+    "filter_events": "Events",
+    "filter_education": "Education",
+    "filter_retail": "Retail",
+    "filter_jewelry": "Jewelry",
+    "views": "views",
+    "press_kit_title": "Want the Full Picture?",
+    "press_kit_subtitle": "Download our media kit with audience demographics, engagement stats, and collaboration details",
+    "press_kit_button": "Download Media Kit (PDF)",
+    "case_study": "Case Study"
+  },
+  "collab": {
+    "page_title": "Book a Collab | Vita Golden City",
+    "hero_title": "Let's Work Together",
+    "hero_subtitle": "Fill out this form and we'll get back to you within 24 hours",
+    "form": {
+      "name_label": "Your Name",
+      "name_placeholder": "Enter your full name",
+      "business_label": "Business Name",
+      "business_placeholder": "Enter your business name",
+      "phone_label": "Phone Number",
+      "phone_placeholder": "10-digit mobile number",
+      "whatsapp_same": "Same number on WhatsApp?",
+      "email_label": "Email (Optional)",
+      "email_placeholder": "your@email.com",
+      "city_label": "City",
+      "city_placeholder": "e.g. Vita, Sangli, Satara",
+      "business_type_label": "Business Type",
+      "business_type_placeholder": "Select your business type",
+      "service_label": "Service Interested In",
+      "service_placeholder": "Select a service",
+      "budget_label": "Budget Range",
+      "budget_placeholder": "Select your budget",
+      "brief_label": "Tell Us About Your Collab",
+      "brief_placeholder": "Describe what you'd like us to promote and any specific ideas you have (minimum 30 characters)",
+      "contact_method_label": "Preferred Contact Method",
+      "submit": "Submit Collab Request",
+      "submitting": "Submitting..."
+    },
+    "business_types": {
+      "restaurant": "Restaurant / Café",
+      "retail": "Retail Shop",
+      "jewelry": "Jewelry",
+      "realestate": "Real Estate",
+      "education": "Education / Coaching",
+      "event": "Event / Wedding",
+      "healthcare": "Healthcare",
+      "beauty": "Beauty / Salon",
+      "other": "Other"
+    },
+    "service_options": {
+      "story": "Story Shoutout",
+      "reel": "Single Reel",
+      "combo": "Reel + Stories Combo",
+      "event": "Event Coverage",
+      "ambassador": "Brand Ambassador",
+      "not_sure": "Not Sure"
+    },
+    "budget_options": {
+      "under_2k": "Under ₹2,000",
+      "2k_5k": "₹2,000 – ₹5,000",
+      "5k_15k": "₹5,000 – ₹15,000",
+      "15k_50k": "₹15,000 – ₹50,000",
+      "above_50k": "₹50,000+"
+    },
+    "contact_methods": {
+      "whatsapp": "WhatsApp",
+      "call": "Call",
+      "email": "Email"
+    },
+    "timeline": {
+      "title": "What Happens Next?",
+      "step1_title": "Submit Your Details",
+      "step1_desc": "Fill out the form with your business info and collab requirements",
+      "step2_title": "We Review & Reach Out",
+      "step2_desc": "Our team reviews your request and contacts you within 24 hours",
+      "step3_title": "Plan Content & Shoot",
+      "step3_desc": "We plan the content strategy, script, and schedule the shoot",
+      "step4_title": "Reel Goes Live!",
+      "step4_desc": "Your promotional content goes live to our 2L+ audience"
+    },
+    "success": {
+      "title": "Request Submitted!",
+      "message": "We will WhatsApp/call you within 24 hours.",
+      "close": "Done"
+    }
+  },
+  "faq": {
+    "page_title": "FAQ | Vita Golden City",
+    "hero_title": "Frequently Asked Questions",
+    "hero_subtitle": "Everything you need to know before collaborating with us",
+    "q1": "How much do you charge for a reel?",
+    "a1": "Our pricing depends on the type of content, duration, and scope of the campaign. We offer packages starting from Story Shoutouts to full Brand Ambassador plans. Submit our collab form for an exact quote tailored to your needs.",
+    "q2": "Do you cover businesses outside Vita?",
+    "a2": "Yes! While our primary audience is from the Sangli, Satara, and Solapur belt, we've worked with businesses across Maharashtra. If your target audience overlaps with ours, we'd love to collaborate.",
+    "q3": "How fast do you respond after I submit the form?",
+    "a3": "We typically respond within 24 hours of receiving your collab request. For urgent requirements, you can also reach out via WhatsApp for a quicker response.",
+    "q4": "What's the turnaround time after we book?",
+    "a4": "For standard reel promotions, we deliver within 48 hours of the shoot. Event coverage and ambassador packages have custom timelines that we discuss during the planning phase.",
+    "q5": "Do I get to approve the content before posting?",
+    "a5": "Absolutely! We share a preview of the content before it goes live. You get to review and request changes to ensure it perfectly represents your brand.",
+    "q6": "What's the payment process?",
+    "a6": "We require 50% advance before the shoot and 50% before posting. We accept UPI, bank transfer, and cash payments. Full payment details are shared after booking confirmation.",
+    "q7": "Can I get a refund?",
+    "a7": "If the content hasn't been shot yet, we offer a full refund minus a small booking fee. Once content is produced, refunds are handled on a case-by-case basis. We always aim for your complete satisfaction.",
+    "q8": "Do you provide content rights? Can I repost?",
+    "a8": "Yes! You receive full rights to repost the content on your own social media pages. We also provide the raw footage for standard and premium packages.",
+    "q9": "What kind of businesses do you NOT promote?",
+    "a9": "We don't promote illegal businesses, misleading products, gambling, or anything that could harm our audience. We also reserve the right to decline projects that don't align with our values.",
+    "q10": "Can we meet in person?",
+    "a10": "Of course! We're based in Vita, Sangli district. We're happy to meet in person to discuss your campaign. You can also visit during the shoot to see the magic happen live."
+  },
+  "contact": {
+    "page_title": "Contact | Vita Golden City",
+    "hero_title": "Get In Touch",
+    "hero_subtitle": "Have a question? We'd love to hear from you",
+    "email_label": "Email Us",
+    "email_value": "collab@vitagoldencity.in",
+    "whatsapp_label": "WhatsApp Us",
+    "whatsapp_value": "Chat on WhatsApp",
+    "instagram_label": "Follow Us",
+    "instagram_value": "@vita_golden_city_official",
+    "location_label": "Visit Us",
+    "location_value": "Vita, Sangli, Maharashtra",
+    "hours_label": "Business Hours",
+    "hours_value": "10:00 AM – 8:00 PM IST",
+    "form_title": "Send Us a Message",
+    "form_name": "Your Name",
+    "form_name_placeholder": "Enter your name",
+    "form_message": "Message",
+    "form_message_placeholder": "Write your message here...",
+    "form_submit": "Send Message",
+    "form_sending": "Sending...",
+    "form_success": "Message sent successfully! We'll get back to you soon."
+  },
+  "footer": {
+    "tagline": "Vita's #1 Content Creator & Brand Promoter",
+    "quick_links": "Quick Links",
+    "connect": "Connect",
+    "credit": "Built by",
+    "credit_name": "Asalkar Techworks",
+    "rights": "All rights reserved."
+  }
+}
