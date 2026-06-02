@@ -12,7 +12,7 @@ export default function FAQ() {
   const { t } = useTranslation()
   const [openId, setOpenId] = useState(null)
   const { ref, isInView } = useScrollAnimation()
-
+// updated git visibility
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -37,6 +37,7 @@ export default function FAQ() {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-heading font-bold gold-gradient-text"
           >
+
             {t('faq.hero_title')}
           </motion.h1>
           <motion.p
