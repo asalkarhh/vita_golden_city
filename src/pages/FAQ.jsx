@@ -23,6 +23,7 @@ export default function FAQ() {
       <Helmet>
         <title>{t('faq.page_title')}</title>
         <meta name="description" content="Frequently asked questions about collaborating with Vita Golden City Official." />
+        <meta name="keywords" content="vita, golden city, vita golden city, vita city of gold, collaboration" />
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">
