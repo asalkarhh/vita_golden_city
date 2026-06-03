@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
-import { ArrowRight, Play } from 'lucide-react'
+import { ArrowRight, Play, Facebook, Youtube } from 'lucide-react'
 import Button from '../ui/Button'
 
 export default function HeroSection() {
@@ -64,7 +64,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex flex-col items-center lg:items-end w-full"
           >
             <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold/20 to-gold-deep/10 blur-2xl" />
@@ -87,6 +87,30 @@ export default function HeroSection() {
                 <span className="text-gold font-bold text-lg">2L+</span>
                 <span className="text-gray-400 text-sm ml-1">followers</span>
               </div>
+            </div>
+
+            {/* Social Media Counters */}
+            <div className="flex w-72 items-center justify-center gap-8 sm:w-80 md:w-96 mt-10 mb-4">
+              {/* Facebook */}
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+                <div className="w-12 h-12 rounded-full bg-blue-600/10 text-blue-500 border border-blue-500/20 flex items-center justify-center mb-2 group-hover:bg-blue-600/20 transition-colors">
+                  <Facebook size={24} />
+                </div>
+                <span className="text-white font-heading font-bold text-xl">100K+</span>
+                <span className="text-gray-400 text-[10px] uppercase tracking-wider mt-1">Followers</span>
+              </a>
+              
+              {/* Vertical Divider */}
+              <div className="w-px h-12 bg-gold/20" />
+
+              {/* YouTube */}
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+                <div className="w-12 h-12 rounded-full bg-red-600/10 text-red-500 border border-red-500/20 flex items-center justify-center mb-2 group-hover:bg-red-600/20 transition-colors">
+                  <Youtube size={24} />
+                </div>
+                <span className="text-white font-heading font-bold text-xl">50K+</span>
+                <span className="text-gray-400 text-[10px] uppercase tracking-wider mt-1">Subscribers</span>
+              </a>
             </div>
           </motion.div>
         </div>

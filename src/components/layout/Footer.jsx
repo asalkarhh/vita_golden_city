@@ -104,7 +104,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-dark-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div id="copyright-section" className="mt-12 pt-8 border-t border-dark-border flex flex-col sm:flex-row items-center justify-between gap-4 relative">
           <p className="text-gray-500 text-sm text-center sm:text-left">
             &copy; {year} Vita Golden City Official. {t('footer.rights')}
           </p>

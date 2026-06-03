@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -21,33 +21,45 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
 
+  const closeMenu = () => setIsMobileOpen(false)
+
   useEffect(() => {
+    // Fix: Prevent horizontal scrolling (side-by-side) on mobile across all pages
+    document.documentElement.classList.add('overflow-x-hidden')
+    document.body.classList.add('overflow-x-hidden', 'w-full')
+
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  useEffect(() => {
-    setIsMobileOpen(false)
-  }, [location.pathname])
-
-  useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [isMobileOpen])
 
   const isHome = location.pathname === '/'
   const navBg = isScrolled || !isHome || isMobileOpen
     ? 'bg-dark/95 backdrop-blur-md border-b border-dark-border'
     : 'bg-transparent'
 
+  // Helper functions for NavLink highlighting
+  const getDesktopLinkClasses = ({ isActive }) =>
+    `px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+      isActive
+        ? 'text-gold bg-gold/10'
+        : 'text-gray-300 hover:text-gold hover:bg-gold/5'
+    }`
+
+  const getMobileLinkClasses = ({ isActive }) =>
+    `block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+      isActive
+        ? 'text-gold bg-gold/10'
+        : 'text-gray-300 hover:text-gold hover:bg-gold/5'
+    }`
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}
+    <nav className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-300 ${navBg}`}
       style={{ top: '40px' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group" onClick={closeMenu}>
             <span className="text-2xl md:text-3xl font-heading font-bold gold-gradient-text">
               VGC
             </span>
@@ -58,17 +70,14 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link
+              <NavLink
                 key={link.path}
                 to={link.path}
-                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  location.pathname === link.path
-                    ? 'text-gold bg-gold/10'
-                    : 'text-gray-300 hover:text-gold hover:bg-gold/5'
-                }`}
+                end={link.path === '/'}
+                className={getDesktopLinkClasses}
               >
                 {t(`nav.${link.key}`)}
-              </Link>
+              </NavLink>
             ))}
             <LanguageToggle />
             <Link
@@ -79,6 +88,7 @@ export default function Navbar() {
             </Link>
           </div>
 
+          {/* Mobile Right side (Language Toggle) */}
           <div className="flex items-center gap-3 lg:hidden">
             <LanguageToggle />
             <button
@@ -92,30 +102,32 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-dark-soft border-t border-dark-border overflow-hidden"
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 right-0 lg:hidden bg-dark/95 backdrop-blur-md border-b border-dark-border shadow-2xl"
           >
             <div className="px-4 py-6 space-y-1">
               {navLinks.map((link) => (
-                <Link
+                <NavLink
                   key={link.path}
                   to={link.path}
-                  className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
-                    location.pathname === link.path
-                      ? 'text-gold bg-gold/10'
-                      : 'text-gray-300 hover:text-gold hover:bg-gold/5'
-                  }`}
+                  end={link.path === '/'}
+                  onClick={closeMenu}
+                  className={getMobileLinkClasses}
                 >
                   {t(`nav.${link.key}`)}
-                </Link>
+                </NavLink>
               ))}
               <Link
                 to="/collab"
+                onClick={closeMenu}
                 className="block mt-4 px-4 py-3 bg-gold text-dark font-semibold rounded-lg text-center"
               >
                 {t('hero.cta_primary')}

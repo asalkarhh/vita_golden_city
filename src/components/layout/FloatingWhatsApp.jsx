@@ -1,12 +1,49 @@
+import { useState, useEffect } from 'react'
 import { WHATSAPP_URL } from '../../utils/constants'
 
 export default function FloatingWhatsApp() {
+  const [bottomPos, setBottomPos] = useState(24) // 24px is equivalent to bottom-6 in Tailwind
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Keep fixed at bottom on mobile screens (less than 768px - Tailwind 'md' breakpoint)
+      if (window.innerWidth < 768) {
+        setBottomPos(24)
+        return
+      }
+
+      const copyrightSection = document.getElementById('copyright-section')
+      if (copyrightSection) {
+        const rect = copyrightSection.getBoundingClientRect()
+        const viewportHeight = window.innerHeight
+        
+        // Check if the top of the copyright section (the horizontal line) is visible
+        if (rect.top < viewportHeight) {
+          // Push the button up by the visible amount of the copyright section + 24px gap
+          setBottomPos(viewportHeight - rect.top + 24)
+        } else {
+          setBottomPos(24)
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+    handleScroll() // Call on mount to set initial position
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [])
+
   return (
     <a
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 flex items-center justify-center rounded-full bg-gold text-dark shadow-lg animate-pulse-gold hover:scale-110 transition-transform"
+      style={{ bottom: `${bottomPos}px` }}
+      className="fixed right-6 z-50 w-14 h-14 flex items-center justify-center rounded-full bg-gold text-dark shadow-lg animate-pulse-gold hover:scale-110 transition-transform"
       aria-label="Chat on WhatsApp"
     >
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
