@@ -1,7 +1,6 @@
 import { z } from 'zod'
 
 export const collabFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
   businessName: z.string().min(2, 'Business name must be at least 2 characters'),
   phone: z
     .string()
@@ -12,15 +11,14 @@ export const collabFormSchema = z.object({
     .email('Enter a valid email')
     .optional()
     .or(z.literal('')),
-  city: z.string().min(1, 'City is required'),
-  businessType: z.string().min(1, 'Please select a business type'),
-  service: z.string().min(1, 'Please select a service'),
-  budget: z.string().min(1, 'Please select a budget range'),
+  city: z.string().optional(),
+  businessType: z.string().optional(),
+  service: z.string().optional(),
+  budget: z.string().optional(),
   brief: z
     .string()
-    .min(30, 'Please write at least 30 characters')
-    .max(500, 'Maximum 500 characters allowed'),
-  contactMethod: z.enum(['whatsapp', 'call', 'email']).default('whatsapp'),
+    .max(500, 'Maximum 500 characters allowed')
+    .optional(),
   botcheck: z.string().max(0).default(''),
 })
 

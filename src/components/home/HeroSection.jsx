@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { ArrowRight, Play, Facebook, Youtube } from 'lucide-react'
 import Button from '../ui/Button'
+import { YOUTUBE_URL } from '../../utils/constants'
 
 export default function HeroSection() {
   const { t } = useTranslation()
@@ -70,7 +71,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold/20 to-gold-deep/10 blur-2xl" />
               <div className="absolute inset-4 rounded-full bg-gradient-to-br from-gold/30 to-transparent border-2 border-gold/20 overflow-hidden">
                 <img
-                  src="/profile-photo.jpg"
+                  src="/logo.png"
                   alt="Vita Golden City Official"
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -92,11 +93,11 @@ export default function HeroSection() {
             {/* Social Media Counters */}
             <div className="flex w-72 items-center justify-center gap-8 sm:w-80 md:w-96 mt-10 mb-4">
               {/* Facebook */}
-              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+              <a href="https://www.facebook.com/share/1NeuBK1w6P/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
                 <div className="w-12 h-12 rounded-full bg-blue-600/10 text-blue-500 border border-blue-500/20 flex items-center justify-center mb-2 group-hover:bg-blue-600/20 transition-colors">
                   <Facebook size={24} />
                 </div>
-                <span className="text-white font-heading font-bold text-xl">100K+</span>
+                <span className="text-white font-heading font-bold text-xl">1K+</span>
                 <span className="text-gray-400 text-[10px] uppercase tracking-wider mt-1">Followers</span>
               </a>
               
@@ -104,11 +105,11 @@ export default function HeroSection() {
               <div className="w-px h-12 bg-gold/20" />
 
               {/* YouTube */}
-              <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+              <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
                 <div className="w-12 h-12 rounded-full bg-red-600/10 text-red-500 border border-red-500/20 flex items-center justify-center mb-2 group-hover:bg-red-600/20 transition-colors">
                   <Youtube size={24} />
                 </div>
-                <span className="text-white font-heading font-bold text-xl">50K+</span>
+                <span className="text-white font-heading font-bold text-xl">800+</span>
                 <span className="text-gray-400 text-[10px] uppercase tracking-wider mt-1">Subscribers</span>
               </a>
             </div>

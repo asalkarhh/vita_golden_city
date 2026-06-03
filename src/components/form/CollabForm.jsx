@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
 import { Send } from 'lucide-react'
 import { collabFormSchema } from '../../utils/validation'
-import { WEB3FORMS_URL } from '../../utils/constants'
+import { WEB3FORMS_URL, WHATSAPP_NUMBER } from '../../utils/constants'
 import FormField from './FormField'
 import SuccessModal from './SuccessModal'
 
@@ -25,12 +25,27 @@ export default function CollabForm() {
     resolver: zodResolver(collabFormSchema),
     defaultValues: {
       whatsappSame: true,
-      contactMethod: 'whatsapp',
       botcheck: '',
     },
   })
 
   const onSubmit = async (data) => {
+    // Generate WhatsApp Message
+    const waText = `*New Collab Request*
+*Business Name:* ${data.businessName}
+*Phone:* ${data.phone}
+*WhatsApp Same:* ${data.whatsappSame ? 'Yes' : 'No'}
+*Email:* ${data.email || 'Not provided'}
+*City:* ${data.city || 'Not provided'}
+*Business Type:* ${data.businessType || 'Not provided'}
+*Service:* ${data.service || 'Not provided'}
+*Budget:* ${data.budget || 'Not provided'}
+*Brief:* ${data.brief || 'Not provided'}`;
+
+    // Open WhatsApp immediately to avoid browser popup blockers
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
+    window.open(waUrl, '_blank');
+
     const accessKey = import.meta.env.VITE_WEB3FORMS_KEY
     if (!accessKey || accessKey === 'YOUR_ACCESS_KEY') {
       setShowSuccess(true)
@@ -42,9 +57,8 @@ export default function CollabForm() {
 
     const formData = {
       access_key: accessKey,
-      subject: `New Collab Request from ${data.name} - ${data.businessName}`,
-      from_name: data.name,
-      name: data.name,
+      subject: `New Collab Request from ${data.businessName}`,
+      from_name: data.businessName,
       business_name: data.businessName,
       phone: data.phone,
       whatsapp_same: data.whatsappSame ? 'Yes' : 'No',
@@ -54,7 +68,6 @@ export default function CollabForm() {
       service: data.service,
       budget: data.budget,
       brief: data.brief,
-      contact_method: data.contactMethod,
       botcheck: data.botcheck,
     }
 
@@ -88,23 +101,13 @@ export default function CollabForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <input type="hidden" {...register('botcheck')} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <FormField label={t('collab.form.name_label')} error={errors.name?.message}>
-            <input
-              {...register('name')}
-              placeholder={t('collab.form.name_placeholder')}
-              className={inputClass}
-            />
-          </FormField>
-
-          <FormField label={t('collab.form.business_label')} error={errors.businessName?.message}>
-            <input
-              {...register('businessName')}
-              placeholder={t('collab.form.business_placeholder')}
-              className={inputClass}
-            />
-          </FormField>
-        </div>
+        <FormField label={t('collab.form.business_label')} error={errors.businessName?.message}>
+          <input
+            {...register('businessName')}
+            placeholder={t('collab.form.business_placeholder')}
+            className={inputClass}
+          />
+        </FormField>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <FormField label={t('collab.form.phone_label')} error={errors.phone?.message}>
@@ -184,24 +187,6 @@ export default function CollabForm() {
             className={`${inputClass} resize-none`}
             maxLength={500}
           />
-        </FormField>
-
-        <FormField label={t('collab.form.contact_method_label')} error={errors.contactMethod?.message}>
-          <div className="flex flex-wrap gap-4">
-            {['whatsapp', 'call', 'email'].map((method) => (
-              <label key={method} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  value={method}
-                  {...register('contactMethod')}
-                  className="w-4 h-4 text-gold border-dark-border bg-dark focus:ring-gold/50 accent-gold"
-                />
-                <span className="text-sm text-gray-300">
-                  {t(`collab.contact_methods.${method}`)}
-                </span>
-              </label>
-            ))}
-          </div>
         </FormField>
 
         <button

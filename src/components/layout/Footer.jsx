@@ -23,9 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <Link to="/" className="inline-block">
-              <span className="text-3xl font-heading font-bold gold-gradient-text">
-                VGC
-              </span>
+              <img src="/logo.png" alt="Vita Golden City" className="h-12 md:h-14 w-auto object-contain" />
             </Link>
             <p className="mt-4 text-gray-400 text-sm leading-relaxed max-w-xs">
               {t('footer.tagline')}
