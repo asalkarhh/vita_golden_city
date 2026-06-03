@@ -21,15 +21,18 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <motion.div
+            <motion.a
+              href="https://www.instagram.com/vita_golden_city_official/"
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 border border-gold/20 rounded-full text-gold text-sm mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 border border-gold/20 rounded-full text-gold text-sm mb-6 hover:bg-gold/20 hover:border-gold/30 transition-colors cursor-pointer"
             >
               <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
               <span>@vita_golden_city_official</span>
-            </motion.div>
+            </motion.a>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight">
               <span className="gold-gradient-text">{t('hero.headline')}</span>
