@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
+import { Eye } from 'lucide-react'
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../../hooks/useScrollAnimation'
 import { featuredReels } from '../../data/featuredReels'
 
@@ -106,8 +107,17 @@ export default function ReelsGrid() {
                   allowTransparency="true"
                   allowFullScreen
                   loading="lazy"
-                  title={`Instagram Reel ${reel.id}`}
+                  title={`Instagram Reel ${reel.brand}`}
                 ></iframe>
+                
+                {/* Brand & Views Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark via-dark/80 to-transparent z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-white font-semibold text-sm drop-shadow-md">{reel.brand}</h3>
+                  <div className="flex items-center gap-1 mt-1 text-gold text-xs drop-shadow-md">
+                    <Eye size={12} />
+                    <span>{reel.views} {t('portfolio.views', 'Views')}</span>
+                  </div>
+                </div>
               </motion.div>
             );
           })}

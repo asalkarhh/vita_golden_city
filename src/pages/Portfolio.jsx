@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
-import { Play, Eye, Download, X } from 'lucide-react'
+import { Eye, Download } from 'lucide-react'
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation'
 import { portfolioItems } from '../data/portfolio'
 import Button from '../components/ui/Button'
-import Modal from '../components/ui/Modal'
 
 const filters = [
   { key: 'all', value: 'filter_all' },
@@ -38,13 +37,38 @@ export default function Portfolio() {
   const { t, i18n } = useTranslation()
   const isMr = i18n.language === 'mr'
   const [activeFilter, setActiveFilter] = useState('all')
-  const [selectedItem, setSelectedItem] = useState(null)
-  const [iframeLoaded, setIframeLoaded] = useState(false)
+  
+  const [activeItem, setActiveItem] = useState(null)
+  const [refreshKeys, setRefreshKeys] = useState({})
+  const [loadingStates, setLoadingStates] = useState({})
   const { ref, isInView } = useScrollAnimation()
 
   useEffect(() => {
-    setIframeLoaded(false)
-  }, [selectedItem])
+    const checkFocus = () => {
+      const activeEl = document.activeElement;
+      if (activeEl?.tagName === 'IFRAME') {
+        const itemId = activeEl.getAttribute('data-item-id');
+        if (itemId && itemId !== activeItem) {
+          if (activeItem) {
+            setRefreshKeys(prev => ({ ...prev, [activeItem]: (prev[activeItem] || 0) + 1 }));
+            setLoadingStates(prev => ({ ...prev, [activeItem]: true }));
+          }
+          setActiveItem(itemId);
+        }
+      }
+    };
+
+    const interval = setInterval(checkFocus, 500);
+    window.addEventListener('blur', checkFocus);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('blur', checkFocus);
+    };
+  }, [activeItem]);
+
+  const handleIframeLoad = (id) => {
+    setLoadingStates(prev => ({ ...prev, [id]: false }));
+  };
 
   const filtered = activeFilter === 'all'
     ? portfolioItems
@@ -117,42 +141,68 @@ export default function Portfolio() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
           >
             <AnimatePresence mode="popLayout">
-              {filtered.map((item) => (
-                <motion.div
-                  key={item.id}
-                  variants={fadeInUp}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedItem(item)}
-                >
-                  <div className="relative aspect-[9/16] bg-dark border border-dark-border rounded-xl overflow-hidden">
-                    <img
-                      src={item.thumbnail}
-                      alt={item.brand}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => {
-                        e.target.style.display = 'none'
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/20 to-transparent" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-14 h-14 flex items-center justify-center rounded-full bg-gold/90 text-dark">
-                        <Play size={24} className="ml-1" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-white font-semibold text-sm">{item.brand}</h3>
-                      <div className="flex items-center gap-1 mt-1 text-gold text-xs">
+              {filtered.map((item) => {
+                const iframeKey = `${item.id}-${refreshKeys[item.id] || 0}`;
+                const isLoading = loadingStates[item.id] !== false;
+                
+                return (
+                  <motion.div
+                    key={item.id}
+                    variants={fadeInUp}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="relative aspect-[9/16] bg-dark-soft border border-dark-border rounded-xl overflow-hidden group"
+                  >
+                    {item.videoUrl ? (
+                      <>
+                        {isLoading && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-dark-soft z-0">
+                            <div className="w-8 h-8 border-2 border-gold/30 border-t-gold rounded-full animate-spin"></div>
+                          </div>
+                        )}
+                        <iframe
+                          key={iframeKey}
+                          data-item-id={item.id.toString()}
+                          src={getReelEmbedUrl(item.videoUrl)}
+                          onLoad={() => handleIframeLoad(item.id)}
+                          className={`absolute top-[-55px] left-0 w-full h-[calc(100%+110px)] transition-opacity duration-500 z-10 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                          frameBorder="0"
+                          scrolling="no"
+                          allowTransparency="true"
+                          allowFullScreen
+                          loading="lazy"
+                          title={`Instagram Reel for ${item.brand}`}
+                        ></iframe>
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          src={item.thumbnail}
+                          alt={item.brand}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          onError={(e) => {
+                            e.target.style.display = 'none'
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/20 to-transparent" />
+                      </>
+                    )}
+                    
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark via-dark/90 to-transparent z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <h3 className="text-white font-semibold text-sm drop-shadow-md">{item.brand}</h3>
+                      <div className="flex items-center gap-1 mt-1 text-gold text-xs drop-shadow-md">
                         <Eye size={12} />
                         <span>{item.views} {t('portfolio.views')}</span>
                       </div>
+                      <p className="text-gray-300 text-[10px] mt-2 line-clamp-3 drop-shadow-md">
+                        {isMr ? item.caseStudy_mr : item.caseStudy_en}
+                      </p>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </motion.div>
 
@@ -171,44 +221,6 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
-
-      {/* Case Study Modal */}
-      <Modal isOpen={!!selectedItem} onClose={() => setSelectedItem(null)}>
-        {selectedItem && (
-          <div>
-            {selectedItem.videoUrl ? (
-              <div className="relative w-full aspect-[9/16] bg-dark-soft rounded-lg mb-6 border border-dark-border overflow-hidden">
-                {!iframeLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center z-0">
-                    <div className="w-8 h-8 border-2 border-gold/30 border-t-gold rounded-full animate-spin"></div>
-                  </div>
-                )}
-                <iframe
-                  src={getReelEmbedUrl(selectedItem.videoUrl)}
-                  onLoad={() => setIframeLoaded(true)}
-                  className={`absolute top-[-55px] left-0 w-full h-[calc(100%+110px)] transition-opacity duration-500 z-10 ${!iframeLoaded ? 'opacity-0' : 'opacity-100'}`}
-                  frameBorder="0"
-                  scrolling="no"
-                  allowTransparency="true"
-                  allowFullScreen
-                  title={`Instagram Reel for ${selectedItem.brand}`}
-                ></iframe>
-              </div>
-            ) : null}
-            <h3 className="text-xl font-heading font-bold text-white mb-2">
-              {selectedItem.brand}
-            </h3>
-            <div className="flex items-center gap-2 text-gold text-sm mb-4">
-              <Eye size={14} />
-              <span>{selectedItem.views} {t('portfolio.views')}</span>
-            </div>
-            <h4 className="text-gold font-semibold text-sm mb-2">{t('portfolio.case_study')}</h4>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              {isMr ? selectedItem.caseStudy_mr : selectedItem.caseStudy_en}
-            </p>
-          </div>
-        )}
-      </Modal>
     </motion.div>
   )
 }
