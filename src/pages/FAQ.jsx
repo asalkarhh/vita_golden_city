@@ -12,7 +12,20 @@ export default function FAQ() {
   const { t } = useTranslation()
   const [openId, setOpenId] = useState(null)
   const { ref, isInView } = useScrollAnimation()
-// updated git visibility
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map((item) => ({
+      "@type": "Question",
+      "name": t(`faq.${item.key}`),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": t(`faq.${item.answerKey}`)
+      }
+    }))
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -22,8 +35,13 @@ export default function FAQ() {
     >
       <Helmet>
         <title>{t('faq.page_title')}</title>
-        <meta name="description" content="Frequently asked questions about collaborating with Vita Golden City Official." />
-        <meta name="keywords" content="vita, golden city, vita golden city, vita city of gold, collaboration" />
+        <meta name="description" content="Frequently asked questions about pricing, packages, and influencer collaborations with Vita Golden City Official." />
+        <meta name="keywords" content="Vita Golden City Pricing, Influencer FAQ, Instagram Reel Cost, Vaibhav Tamkhade Collab" />
+        <meta property="og:title" content={t('faq.page_title')} />
+        <meta property="og:description" content="Frequently asked questions about pricing, packages, and influencer collaborations with Vita Golden City Official." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.vitagoldencity.com/faq" />
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">

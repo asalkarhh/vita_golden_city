@@ -25,7 +25,12 @@ export default function Collab() {
     >
       <Helmet>
         <title>{t('collab.page_title')}</title>
-        <meta name="description" content="Book a collaboration with Vita Golden City. Fill out our form and we'll reach out within 24 hours." />
+        <meta name="description" content="Book a brand collaboration with Vaibhav Tamkhade. Fill out the form for Instagram Reel promotions and local business marketing in Vita, Sangli." />
+        <meta name="keywords" content="Hire Influencer Sangli, Book Instagram Collab, Contact Vaibhav Tamkhade, Local Brand Promotion" />
+        <meta property="og:title" content={t('collab.page_title')} />
+        <meta property="og:description" content="Book a brand collaboration with Vaibhav Tamkhade. Fill out the form for Instagram Reel promotions." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.vitagoldencity.com/collab" />
       </Helmet>
 
       <section className="pt-36 pb-10 bg-dark relative">

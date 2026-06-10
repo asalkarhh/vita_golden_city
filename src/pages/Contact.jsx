@@ -71,7 +71,12 @@ export default function Contact() {
     >
       <Helmet>
         <title>{t('contact.page_title')}</title>
-        <meta name="description" content="Get in touch with Vita Golden City Official. Email, WhatsApp, or visit us in Vita, Sangli." />
+        <meta name="description" content="Contact Vaibhav Tamkhade at Vita Golden City Official. Reach out via email, WhatsApp, or visit us in Vita, Sangli, Maharashtra." />
+        <meta name="keywords" content="Contact Vita Golden City, Vaibhav Tamkhade Email, Influencer WhatsApp Number Sangli" />
+        <meta property="og:title" content={t('contact.page_title')} />
+        <meta property="og:description" content="Contact Vaibhav Tamkhade at Vita Golden City Official. Reach out via email, WhatsApp, or visit us in Vita, Sangli, Maharashtra." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.vitagoldencity.com/contact" />
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">

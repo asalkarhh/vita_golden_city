@@ -79,7 +79,7 @@
     "pricing_note": "Final pricing depends on brand fit and campaign scope. Submit the collab form for an exact quote.",
     "story": {
       "name": "Story Shoutout",
-      "price": "₹X",
+      "price": "₹2,000",
       "price_label": "Starting at",
       "features": [
         "24-hour Instagram story",
@@ -91,7 +91,7 @@
     },
     "reel": {
       "name": "Single Reel Promotion",
-      "price": "₹Y",
+      "price": "₹6,000",
       "price_label": "Starting at",
       "features": [
         "Dedicated promotional reel",
@@ -103,8 +103,8 @@
       ]
     },
     "combo": {
-      "name": "Reel + Stories Combo",
-      "price": "₹Z",
+      "name": "Story + Reel Promotion",
+      "price": "₹8,000",
       "price_label": "Starting at",
       "features": [
         "1 promotional reel",
@@ -118,8 +118,8 @@
     },
     "event": {
       "name": "Event Coverage",
-      "price": "Custom",
-      "price_label": "Quote",
+      "price": "₹10,000",
+      "price_label": "Starting at",
       "features": [
         "Half-day or full-day coverage",
         "Multiple reels & stories",
@@ -131,11 +131,10 @@
     },
     "ambassador": {
       "name": "Brand Ambassador",
-      "price": "Custom",
-      "price_label": "Monthly",
+      "price": "₹12,000",
+      "price_label": "Per Video",
       "features": [
-        "4 reels per month",
-        "12 stories per month",
+        "Weekly 2 videos",
         "Exclusive partnership",
         "Priority scheduling",
         "Monthly performance report",
@@ -203,7 +202,7 @@
     "service_options": {
       "story": "Story Shoutout",
       "reel": "Single Reel",
-      "combo": "Reel + Stories Combo",
+      "combo": "Story + Reel Promotion",
       "event": "Event Coverage",
       "ambassador": "Brand Ambassador",
       "not_sure": "Not Sure"
@@ -267,7 +266,7 @@
     "hero_title": "Get In Touch",
     "hero_subtitle": "Have a question? We'd love to hear from you",
     "email_label": "Email Us",
-    "email_value": "collab@vitagoldencity.in",
+    "email_value": "13tamkhadevaibhavtkma@gmail.com",
     "whatsapp_label": "WhatsApp Us",
     "whatsapp_value": "Chat on WhatsApp",
     "instagram_label": "Follow Us",
@@ -290,7 +289,7 @@
     "quick_links": "Quick Links",
     "connect": "Connect",
     "credit": "Built by",
-    "credit_name": "Asalkar Techworks",
+    "credit_name": "Asalkar Techworks Pvt Ltd",
     "rights": "All rights reserved."
   }
 }

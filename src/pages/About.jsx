@@ -5,12 +5,13 @@ import { Heart, Users, Award, Shield } from 'lucide-react'
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation'
 
 const timeline = [
-  { year: '2019', title_en: 'The Beginning', title_mr: 'सुरुवात', desc_en: 'Started sharing stories about Vita on Instagram', desc_mr: 'इंस्टाग्रामवर विटाबद्दल कहाण्या शेअर करायला सुरुवात केली' },
-  { year: '2020', title_en: '10K Followers', title_mr: '१०K फॉलोअर्स', desc_en: 'Crossed 10,000 followers, started first brand collaborations', desc_mr: '१०,००० फॉलोअर्स पार केले, पहिले ब्रँड कोलॅबोरेशन्स सुरू केले' },
-  { year: '2021', title_en: '50K Milestone', title_mr: '५०K टप्पा', desc_en: 'Reached 50K followers, featured in local media', desc_mr: '५०K फॉलोअर्सपर्यंत पोहोचलो, स्थानिक मीडियामध्ये वैशिष्ट्य' },
-  { year: '2022', title_en: '1 Lakh Family', title_mr: '१ लाख कुटुंब', desc_en: 'Crossed 1 lakh followers, 200+ brand promotions completed', desc_mr: '१ लाख फॉलोअर्स पार केले, २००+ ब्रँड प्रमोशन्स पूर्ण' },
-  { year: '2023', title_en: 'Full-Time Creator', title_mr: 'पूर्णवेळ क्रिएटर', desc_en: 'Became a full-time content creator, launched premium packages', desc_mr: 'पूर्णवेळ कंटेंट क्रिएटर बनलो, प्रीमियम पॅकेजेस लॉन्च केले' },
-  { year: '2024', title_en: '2 Lakh+ Strong', title_mr: '२ लाख+ मजबूत', desc_en: 'Crossed 2 lakh followers, 500+ brands promoted, trusted name in local marketing', desc_mr: '२ लाख+ फॉलोअर्स पार केले, ५००+ ब्रँड्स प्रमोट, स्थानिक मार्केटिंगमधील विश्वसनीय नाव' },
+  { year: '2020', title_en: 'The Beginning', title_mr: 'सुरुवात', desc_en: 'Started sharing stories about Vita on Instagram', desc_mr: 'इंस्टाग्रामवर विटाबद्दल कहाण्या शेअर करायला सुरुवात केली' },
+  { year: '2021', title_en: '10K Followers', title_mr: '१०K फॉलोअर्स', desc_en: 'Crossed 10,000 followers, started first brand collaborations', desc_mr: '१०,००० फॉलोअर्स पार केले, पहिले ब्रँड कोलॅबोरेशन्स सुरू केले' },
+  { year: '2022', title_en: '50K Milestone', title_mr: '५०K टप्पा', desc_en: 'Reached 50K followers, featured in local media', desc_mr: '५०K फॉलोअर्सपर्यंत पोहोचलो, स्थानिक मीडियामध्ये वैशिष्ट्य' },
+  { year: '2023', title_en: '1 Lakh Family', title_mr: '१ लाख कुटुंब', desc_en: 'Crossed 1 lakh followers, 200+ brand promotions completed', desc_mr: '१ लाख फॉलोअर्स पार केले, २००+ ब्रँड प्रमोशन्स पूर्ण' },
+  { year: '2024', title_en: 'Full-Time Creator', title_mr: 'पूर्णवेळ क्रिएटर', desc_en: 'Became a full-time content creator', desc_mr: 'पूर्णवेळ कंटेंट क्रिएटर बनलो' },
+  { year: '2025', title_en: 'Premium Packages', title_mr: 'प्रीमियम पॅकेजेस', desc_en: 'Launched premium packages, expanded local reach', desc_mr: 'प्रीमियम पॅकेजेस लॉन्च केले, स्थानिक पोहोच वाढवली' },
+  { year: '2026', title_en: '2 Lakh+ Strong', title_mr: '२ लाख+ मजबूत', desc_en: 'Crossed 2 lakh followers, 500+ brands promoted, trusted name in local marketing', desc_mr: '२ लाख+ फॉलोअर्स पार केले, ५००+ ब्रँड्स प्रमोट, स्थानिक मार्केटिंगमधील विश्वसनीय नाव' },
 ]
 
 const values = [
@@ -36,7 +37,12 @@ export default function About() {
     >
       <Helmet>
         <title>{t('about.page_title')}</title>
-        <meta name="description" content="Learn about Vita Golden City Official — the story, journey, and values behind Vita's biggest content creator." />
+        <meta name="description" content="Learn about Vaibhav Tamkhade and the journey of Vita Golden City Official. The most trusted Marathi content creator and social media influencer in Sangli District." />
+        <meta name="keywords" content="Vaibhav Tamkhade, Vita Golden City Owner, Influencer from Vita, Local Influencer Sangli, Marathi Content Creator" />
+        <meta property="og:title" content={t('about.page_title')} />
+        <meta property="og:description" content="Learn about Vaibhav Tamkhade and the journey of Vita Golden City Official. The most trusted Marathi content creator in Sangli District." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.vitagoldencity.com/about" />
       </Helmet>
 
       {/* Hero */}
@@ -92,19 +98,23 @@ export default function About() {
           <div className="relative">
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gold/20 md:-translate-x-px" />
             <div className="space-y-12">
-              {timeline.map((item, index) => (
+            {timeline.map((item, index) => {
+              const isEven = index % 2 === 0;
+              return (
                 <motion.div
                   key={item.year}
                   initial={{ opacity: 0, y: 30 }}
                   animate={timelineInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex items-start gap-8 ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  className={`relative flex items-start ${
+                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
                 >
                   <div className="hidden md:block md:w-1/2" />
-                  <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-gold rounded-full -translate-x-1.5 md:-translate-x-1.5 mt-2 ring-4 ring-dark" />
-                  <div className="pl-12 md:pl-0 md:w-1/2">
+                  <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-gold rounded-full -translate-x-1.5 mt-2 ring-4 ring-dark" />
+                  <div className={`pl-12 md:w-1/2 ${
+                    isEven ? 'md:pl-12 md:pr-0 md:text-left' : 'md:pr-12 md:pl-0 md:text-right'
+                  }`}>
                     <span className="text-gold font-heading font-bold text-xl">{item.year}</span>
                     <h3 className="text-white font-semibold text-lg mt-1">
                       {isMr ? item.title_mr : item.title_en}
@@ -114,7 +124,8 @@ export default function About() {
                     </p>
                   </div>
                 </motion.div>
-              ))}
+              );
+            })}
             </div>
           </div>
         </div>

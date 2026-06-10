@@ -1,20 +1,60 @@
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../../hooks/useScrollAnimation'
-import { Play } from 'lucide-react'
+import { featuredReels } from '../../data/featuredReels'
 
-const reelPlaceholders = [
-  { id: 1, url: '[REEL_URL_1]', title: 'Brand Promotion 1' },
-  { id: 2, url: '[REEL_URL_2]', title: 'Brand Promotion 2' },
-  { id: 3, url: '[REEL_URL_3]', title: 'Brand Promotion 3' },
-  { id: 4, url: '[REEL_URL_4]', title: 'Brand Promotion 4' },
-  { id: 5, url: '[REEL_URL_5]', title: 'Brand Promotion 5' },
-  { id: 6, url: '[REEL_URL_6]', title: 'Brand Promotion 6' },
-]
+function getReelEmbedUrl(reelUrl) {
+  if (!reelUrl) return null;
+  try {
+    const url = new URL(reelUrl);
+    const pathSegments = url.pathname.split('/').filter(Boolean);
+    if (pathSegments[0] === 'reel' || pathSegments[0] === 'p') {
+      const reelId = pathSegments[1];
+      return `https://www.instagram.com/p/${reelId}/embed/?hidecaption=true`;
+    }
+    return null;
+  } catch (error) {
+    console.error("Invalid reel URL:", error);
+    return null;
+  }
+}
 
 export default function ReelsGrid() {
   const { t } = useTranslation()
   const { ref, isInView } = useScrollAnimation()
+
+  const [activeReel, setActiveReel] = useState(null)
+  const [refreshKeys, setRefreshKeys] = useState({})
+  const [loadingStates, setLoadingStates] = useState({})
+
+  useEffect(() => {
+    const checkFocus = () => {
+      const activeEl = document.activeElement;
+      if (activeEl?.tagName === 'IFRAME') {
+        const reelId = activeEl.getAttribute('data-reel-id');
+        if (reelId && reelId !== activeReel) {
+          if (activeReel) {
+            // Refresh the previously active iframe so it stops playing
+            setRefreshKeys(prev => ({ ...prev, [activeReel]: (prev[activeReel] || 0) + 1 }));
+            setLoadingStates(prev => ({ ...prev, [activeReel]: true }));
+          }
+          setActiveReel(reelId);
+        }
+      }
+    };
+
+    const interval = setInterval(checkFocus, 500);
+    window.addEventListener('blur', checkFocus);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('blur', checkFocus);
+    };
+  }, [activeReel]);
+
+  const handleIframeLoad = (id) => {
+    setLoadingStates(prev => ({ ...prev, [id]: false }));
+  };
 
   return (
     <section className="py-20 bg-dark">
@@ -38,27 +78,39 @@ export default function ReelsGrid() {
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
         >
-          {reelPlaceholders.map((reel) => (
-            <motion.div
-              key={reel.id}
-              variants={fadeInUp}
-              className="relative aspect-[9/16] bg-dark-soft border border-dark-border rounded-xl overflow-hidden group cursor-pointer"
-            >
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500 group-hover:text-gold transition-colors">
-                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gold/10 group-hover:bg-gold/20 transition-colors mb-3">
-                  <Play size={28} className="ml-1" />
-                </div>
-                <span className="text-xs text-center px-4">
-                  {reel.title}
-                </span>
-                <span className="text-[10px] mt-1 text-gray-600">
-                  Replace with Instagram embed
-                </span>
-              </div>
-            </motion.div>
-          ))}
+          {featuredReels.map((reel) => {
+            const iframeKey = `${reel.id}-${refreshKeys[reel.id] || 0}`;
+            const isLoading = loadingStates[reel.id] !== false;
+            
+            return (
+              <motion.div
+                key={reel.id}
+                variants={fadeInUp}
+                className="relative aspect-[9/16] bg-dark-soft border border-dark-border rounded-xl overflow-hidden group"
+              >
+                {isLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-dark-soft z-0">
+                    <div className="w-8 h-8 border-2 border-gold/30 border-t-gold rounded-full animate-spin"></div>
+                  </div>
+                )}
+                <iframe
+                  key={iframeKey}
+                  data-reel-id={reel.id.toString()}
+                  src={getReelEmbedUrl(reel.url)}
+                  onLoad={() => handleIframeLoad(reel.id)}
+                  className={`absolute top-[-55px] left-0 w-full h-[calc(100%+110px)] transition-opacity duration-500 z-10 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency="true"
+                  allowFullScreen
+                  loading="lazy"
+                  title={`Instagram Reel ${reel.id}`}
+                ></iframe>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

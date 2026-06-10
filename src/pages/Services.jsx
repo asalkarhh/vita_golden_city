@@ -19,7 +19,12 @@ export default function Services() {
     >
       <Helmet>
         <title>{t('services.page_title')}</title>
-        <meta name="description" content="Explore our promotion packages — Story Shoutouts, Reel Promotions, Event Coverage, and Brand Ambassador plans." />
+        <meta name="description" content="Explore our influencer marketing services: Instagram Reel promotions, Story shoutouts, Event coverage, and Brand Ambassador packages in Maharashtra." />
+        <meta name="keywords" content="Instagram Reel Promotions, Brand Ambassador Sangli, Event Coverage Maharashtra, Influencer Marketing Packages" />
+        <meta property="og:title" content={t('services.page_title')} />
+        <meta property="og:description" content="Explore our influencer marketing services: Instagram Reel promotions, Story shoutouts, Event coverage, and Brand Ambassador packages in Maharashtra." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.vitagoldencity.com/services" />
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">

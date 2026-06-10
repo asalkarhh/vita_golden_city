@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
@@ -18,12 +18,33 @@ const filters = [
   { key: 'jewelry', value: 'filter_jewelry' },
 ]
 
+function getReelEmbedUrl(reelUrl) {
+  if (!reelUrl) return null;
+  try {
+    const url = new URL(reelUrl);
+    const pathSegments = url.pathname.split('/').filter(Boolean);
+    if (pathSegments[0] === 'reel' || pathSegments[0] === 'p') {
+      const reelId = pathSegments[1];
+      return `https://www.instagram.com/p/${reelId}/embed/?hidecaption=true`;
+    }
+    return null;
+  } catch (error) {
+    console.error("Invalid reel URL:", error);
+    return null;
+  }
+}
+
 export default function Portfolio() {
   const { t, i18n } = useTranslation()
   const isMr = i18n.language === 'mr'
   const [activeFilter, setActiveFilter] = useState('all')
   const [selectedItem, setSelectedItem] = useState(null)
+  const [iframeLoaded, setIframeLoaded] = useState(false)
   const { ref, isInView } = useScrollAnimation()
+
+  useEffect(() => {
+    setIframeLoaded(false)
+  }, [selectedItem])
 
   const filtered = activeFilter === 'all'
     ? portfolioItems
@@ -38,7 +59,12 @@ export default function Portfolio() {
     >
       <Helmet>
         <title>{t('portfolio.page_title')}</title>
-        <meta name="description" content="Browse our portfolio of successful brand collaborations. Real results from real businesses." />
+        <meta name="description" content="Browse successful brand collaborations by Vita Golden City. See real results from local businesses, restaurants, and real estate in Sangli and Maharashtra." />
+        <meta name="keywords" content="Vita Golden City Portfolio, Brand Collaborations, Influencer Marketing Case Studies, Instagram Results" />
+        <meta property="og:title" content={t('portfolio.page_title')} />
+        <meta property="og:description" content="Browse successful brand collaborations by Vita Golden City. See real results from local businesses in Sangli and Maharashtra." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.vitagoldencity.com/portfolio" />
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">
@@ -150,12 +176,25 @@ export default function Portfolio() {
       <Modal isOpen={!!selectedItem} onClose={() => setSelectedItem(null)}>
         {selectedItem && (
           <div>
-            <div className="aspect-video bg-dark rounded-lg mb-6 flex items-center justify-center border border-dark-border">
-              <div className="text-center text-gray-500">
-                <Play size={40} className="mx-auto mb-2 text-gold" />
-                <p className="text-xs">Reel embed placeholder</p>
+            {selectedItem.videoUrl ? (
+              <div className="relative w-full aspect-[9/16] bg-dark-soft rounded-lg mb-6 border border-dark-border overflow-hidden">
+                {!iframeLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center z-0">
+                    <div className="w-8 h-8 border-2 border-gold/30 border-t-gold rounded-full animate-spin"></div>
+                  </div>
+                )}
+                <iframe
+                  src={getReelEmbedUrl(selectedItem.videoUrl)}
+                  onLoad={() => setIframeLoaded(true)}
+                  className={`absolute top-[-55px] left-0 w-full h-[calc(100%+110px)] transition-opacity duration-500 z-10 ${!iframeLoaded ? 'opacity-0' : 'opacity-100'}`}
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency="true"
+                  allowFullScreen
+                  title={`Instagram Reel for ${selectedItem.brand}`}
+                ></iframe>
               </div>
-            </div>
+            ) : null}
             <h3 className="text-xl font-heading font-bold text-white mb-2">
               {selectedItem.brand}
             </h3>

@@ -6,7 +6,7 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/vita_golden_city_officia
 export const INSTAGRAM_HANDLE = '@vita_golden_city_official'
 export const YOUTUBE_URL = 'https://www.youtube.com/@vita_golden_city_official'
 
-export const EMAIL = 'collab@vitagoldencity.in'
+export const EMAIL = '13tamkhadevaibhavtkma@gmail.com'
 
 export const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
 
