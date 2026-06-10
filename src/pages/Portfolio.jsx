@@ -85,12 +85,13 @@ export default function Portfolio() {
     >
       <Helmet>
         <title>{t('portfolio.page_title')}</title>
-        <meta name="description" content="Browse successful brand collaborations by Vita Golden City. See real results from local businesses, restaurants, and real estate in Sangli and Maharashtra." />
+        <meta name="description" content="Browse successful brand collaborations by Vita Golden City. See real results from local businesses, restaurants, real estate, jewelers, and retail shops in Sangli and Maharashtra." />
         <meta name="keywords" content="Vita Golden City Portfolio, Brand Collaborations, Influencer Marketing Case Studies, Instagram Results" />
         <meta property="og:title" content={t('portfolio.page_title')} />
         <meta property="og:description" content="Browse successful brand collaborations by Vita Golden City. See real results from local businesses in Sangli and Maharashtra." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.vitagoldencity.com/portfolio" />
+        <meta property="og:image" content="https://www.vitagoldencity.com/logo.png" />
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">
