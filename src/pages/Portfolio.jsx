@@ -6,6 +6,7 @@ import { Eye, Download } from 'lucide-react'
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation'
 import { portfolioItems } from '../data/portfolio'
 import Button from '../components/ui/Button'
+import { track } from '@vercel/analytics'
 
 const filters = [
   { key: 'all', value: 'filter_all' },
@@ -54,6 +55,7 @@ export default function Portfolio() {
             setLoadingStates(prev => ({ ...prev, [activeItem]: true }));
           }
           setActiveItem(itemId);
+          track('Played Portfolio Video', { itemId });
         }
       }
     };
@@ -214,7 +216,12 @@ export default function Portfolio() {
             <p className="text-gray-400 text-sm mb-6">
               {t('portfolio.press_kit_subtitle')}
             </p>
-            <Button href="/press-kit.pdf" variant="outline" size="md">
+            <Button 
+              href="/press-kit.pdf" 
+              variant="outline" 
+              size="md"
+              onClick={() => track('Downloaded Media Kit')}
+            >
               <Download size={18} />
               {t('portfolio.press_kit_button')}
             </Button>

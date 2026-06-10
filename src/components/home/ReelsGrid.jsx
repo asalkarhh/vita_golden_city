@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Eye } from 'lucide-react'
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../../hooks/useScrollAnimation'
 import { featuredReels } from '../../data/featuredReels'
+import { track } from '@vercel/analytics'
 
 function getReelEmbedUrl(reelUrl) {
   if (!reelUrl) return null;
@@ -41,6 +42,7 @@ export default function ReelsGrid() {
             setLoadingStates(prev => ({ ...prev, [activeReel]: true }));
           }
           setActiveReel(reelId);
+          track('Played Featured Reel', { reelId });
         }
       }
     };
