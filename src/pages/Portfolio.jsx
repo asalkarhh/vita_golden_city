@@ -76,6 +76,36 @@ export default function Portfolio() {
     ? portfolioItems
     : portfolioItems.filter((item) => item.category === activeFilter)
 
+  const portfolioSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Vita Golden City Official - Portfolio",
+    "description": "A collection of successful brand promotion videos and case studies from collaborations with local businesses in Sangli, Maharashtra.",
+    "itemListElement": portfolioItems.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "VideoObject",
+        "name": `Promotion for ${item.brand}`,
+        "description": isMr ? item.caseStudy_mr : item.caseStudy_en,
+        "thumbnailUrl": `https://www.vitagoldencity.com${item.thumbnail}`,
+        "contentUrl": item.videoUrl,
+        "author": {
+            "@type": "Person",
+            "name": "Vaibhav Tamkhade"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vita Golden City Official",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.vitagoldencity.com/logo.png"
+            }
+        }
+      }
+    }))
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -92,6 +122,9 @@ export default function Portfolio() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.vitagoldencity.com/portfolio" />
         <meta property="og:image" content="https://www.vitagoldencity.com/logo.png" />
+        <script type="application/ld+json">
+          {JSON.stringify(portfolioSchema)}
+        </script>
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">

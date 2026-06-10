@@ -28,6 +28,24 @@ export default function About() {
   const { ref: timelineRef, isInView: timelineInView } = useScrollAnimation()
   const { ref: valuesRef, isInView: valuesInView } = useScrollAnimation()
 
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": t('about.page_title'),
+    "description": "Learn about Vaibhav Tamkhade and the journey of Vita Golden City Official. The most trusted Marathi content creator and social media influencer in Sangli District.",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Vaibhav Tamkhade",
+      "jobTitle": "Content Creator",
+      "description": "Founder of Vita Golden City Official, a leading social media influencer from Vita, Sangli.",
+      "url": "https://www.vitagoldencity.com/about",
+      "sameAs": [
+        "https://www.instagram.com/vita_golden_city_official/",
+        "https://www.youtube.com/@vita_golden_city_official"
+      ]
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -43,6 +61,9 @@ export default function About() {
         <meta property="og:description" content="Learn about Vaibhav Tamkhade and the journey of Vita Golden City Official. The most trusted Marathi content creator in Sangli District." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.vitagoldencity.com/about" />
+        <script type="application/ld+json">
+          {JSON.stringify(aboutSchema)}
+        </script>
       </Helmet>
 
       {/* Hero */}

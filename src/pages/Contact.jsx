@@ -60,6 +60,26 @@ export default function Contact() {
     }
   }
 
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": t('contact.page_title'),
+    "description": "Contact Vaibhav Tamkhade at Vita Golden City Official. Reach out via email, WhatsApp, or visit us in Vita, Sangli, Maharashtra.",
+    "mainEntity": {
+        "@type": "Organization",
+        "name": "Vita Golden City Official",
+        "email": EMAIL,
+        "telephone": "+918605159015",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Vita",
+            "addressLocality": "Sangli",
+            "addressRegion": "MH",
+            "addressCountry": "IN"
+        }
+    }
+  };
+
   const inputClass = 'w-full px-4 py-3 bg-dark border border-dark-border rounded-lg text-white placeholder-gray-500 focus:border-gold focus:ring-1 focus:ring-gold/50 outline-none transition-colors text-sm'
 
   return (
@@ -77,6 +97,9 @@ export default function Contact() {
         <meta property="og:description" content="Contact Vaibhav Tamkhade at Vita Golden City Official. Reach out via email, WhatsApp, or visit us in Vita, Sangli, Maharashtra." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.vitagoldencity.com/contact" />
+        <script type="application/ld+json">
+          {JSON.stringify(contactSchema)}
+        </script>
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">

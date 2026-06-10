@@ -10,6 +10,29 @@ export default function Services() {
   const { t } = useTranslation()
   const { ref, isInView } = useScrollAnimation()
 
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "name": "Influencer Marketing Services by Vita Golden City",
+    "description": "Service packages for Instagram Reel promotions, brand ambassadorship, and event coverage in Sangli, Maharashtra.",
+    "itemListElement": services.map((service, index) => {
+      const priceString = t(`services.${service.id}.price`);
+      const price = priceString.replace(/[^0-9]/g, '');
+      return {
+        "@type": "Offer",
+        "position": index + 1,
+        "itemOffered": {
+          "@type": "Service",
+          "name": t(`services.${service.id}.name`),
+          "description": t(`services.${service.id}.features`, { returnObjects: true }).join('. ')
+        },
+        ...(price && {
+          "priceSpecification": { "@type": "PriceSpecification", "price": price, "priceCurrency": "INR" }
+        })
+      }
+    })
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -25,6 +48,9 @@ export default function Services() {
         <meta property="og:description" content="Explore our influencer marketing services: Instagram Reel promotions, Story shoutouts, Event coverage, and Brand Ambassador packages in Maharashtra." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.vitagoldencity.com/services" />
+        <script type="application/ld+json">
+          {JSON.stringify(servicesSchema)}
+        </script>
       </Helmet>
 
       <section className="pt-36 pb-20 bg-dark relative">
